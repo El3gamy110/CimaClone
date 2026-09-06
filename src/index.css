@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Syne:wght@400..800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  
+  body {
+    @apply bg-obsidian text-gray-100 font-sans antialiased min-h-screen;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-elevated/60 backdrop-blur-lg border border-primary/15;
+  }
+  
+  .glass-panel-hover {
+    @apply hover:bg-[#201c32]/80 hover:shadow-[0_0_24px_-4px_rgba(168,85,247,0.35)] hover:border-primary-soft/45 transition-all duration-300;
+  }
+  
+  .text-shadow-glow {
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  }
+}
