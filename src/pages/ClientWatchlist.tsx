@@ -5,7 +5,6 @@ import { Play, Check, Star, Zap, Bookmark } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { RatingBadge } from '../components/ui/RatingBadge';
-import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const watchHabitsData = [
   { name: 'May', count: 18 },
@@ -180,19 +179,23 @@ export default function ClientWatchlist() {
               <span className="text-[10px] text-gray-500 font-mono">Past 6 Months</span>
             </div>
             
-            <div className="h-40 w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={watchHabitsData}>
-                  <Tooltip 
-                    cursor={{fill: 'rgba(255,255,255,0.05)'}}
-                    contentStyle={{ backgroundColor: '#12111a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px' }}
-                    itemStyle={{ color: '#a855f7', fontWeight: 'bold' }}
-                    labelStyle={{ color: '#9ca3af', fontSize: '12px' }}
-                  />
-                  <Bar dataKey="count" fill="#374151" radius={[4, 4, 0, 0]} activeBar={{ fill: '#a855f7' }} />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{fill: '#6b7280', fontSize: 10}} dy={10} />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="h-40 w-full flex items-end gap-2 pt-4">
+              {watchHabitsData.map((d) => {
+                const maxCount = Math.max(...watchHabitsData.map(x => x.count));
+                const pct = Math.round((d.count / maxCount) * 100);
+                return (
+                  <div key={d.name} className="flex-1 flex flex-col items-center gap-1 group">
+                    <div className="relative w-full flex justify-center">
+                      <div
+                        className="w-full rounded-t-sm bg-white/10 group-hover:bg-primary-soft transition-colors duration-300"
+                        style={{ height: `${pct * 1.2}px` }}
+                        title={`${d.count} titles`}
+                      />
+                    </div>
+                    <span className="text-[10px] text-gray-500 font-mono mt-1">{d.name}</span>
+                  </div>
+                );
+              })}
             </div>
             
             <div className="flex justify-between items-center pt-2 border-t border-white/5">

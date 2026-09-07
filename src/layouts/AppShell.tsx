@@ -7,7 +7,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from '../hooks/useDebounce';
 import { useStore } from '../store/useStore';
 import { supabase } from '../lib/supabase';
-import Scene from '../components/3d/Scene';
+import { lazy, Suspense } from 'react';
+
+const Scene = lazy(() => import('../components/3d/Scene'));
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -83,7 +85,9 @@ export default function AppShell() {
   return (
     <>
       {/* Global 3D Animated Scene Background */}
-      <Scene />
+      <Suspense fallback={<div className="fixed inset-0 bg-obsidian z-0" />}>
+        <Scene />
+      </Suspense>
       
       <div className="flex flex-col min-h-screen relative z-10 overflow-x-hidden">
         {/* Global Header */}

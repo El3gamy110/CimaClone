@@ -66,7 +66,7 @@ export default function TvDossier() {
         {/* Full-bleed background */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-full bg-obsidian">
           <img 
-            src={getImageUrl(tv.backdrop_path, 'original')} 
+            src={getImageUrl(tv.backdrop_path, 'w1280')} 
             alt={tv.name}
             className="w-full h-full object-cover opacity-40"
           />
@@ -165,6 +165,7 @@ export default function TvDossier() {
               {backdrops[0] && (
                 <img 
                   src={getImageUrl(backdrops[0].file_path, 'w500')} 
+                  loading="lazy"
                   onClick={() => window.open(getImageUrl(backdrops[0].file_path, 'original'), '_blank')}
                   className="col-span-2 row-span-2 w-full h-full object-cover rounded-xl cursor-pointer hover:opacity-80 transition-opacity" 
                   alt="Still 1" 
@@ -173,6 +174,7 @@ export default function TvDossier() {
               {backdrops[1] && (
                 <img 
                   src={getImageUrl(backdrops[1].file_path, 'w500')} 
+                  loading="lazy"
                   onClick={() => window.open(getImageUrl(backdrops[1].file_path, 'original'), '_blank')}
                   className="col-span-2 row-span-2 w-full h-full object-cover rounded-xl cursor-pointer hover:opacity-80 transition-opacity" 
                   alt="Still 2" 
@@ -200,6 +202,7 @@ export default function TvDossier() {
                     <img 
                       src={actor.profile_path ? getImageUrl(actor.profile_path, 'w500') : 'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=100&h=100'} 
                       alt={actor.name} 
+                      loading="lazy"
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>

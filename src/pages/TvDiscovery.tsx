@@ -48,7 +48,7 @@ export default function TvDiscovery() {
         {heroTv ? (
           <>
             <img 
-              src={getImageUrl(heroTv.backdrop_path, 'original')} 
+              src={getImageUrl(heroTv.backdrop_path, 'w1280')} 
               alt={heroTv.name}
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
@@ -109,8 +109,8 @@ export default function TvDiscovery() {
             <h2 className="font-syne text-2xl md:text-3xl font-bold text-white leading-tight">Trending TV Series</h2>
           </div>
           <div className="flex gap-2 shrink-0 pb-1">
-            <button onClick={() => scrollCarousel('left')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronLeft className="w-4 h-4" /></button>
-            <button onClick={() => scrollCarousel('right')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronRight className="w-4 h-4" /></button>
+            <button aria-label="Scroll left" onClick={() => scrollCarousel('left')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronLeft className="w-4 h-4" /></button>
+            <button aria-label="Scroll right" onClick={() => scrollCarousel('right')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronRight className="w-4 h-4" /></button>
           </div>
         </div>
         
@@ -122,6 +122,7 @@ export default function TvDiscovery() {
                 <img 
                   src={getImageUrl(tv.poster_path)} 
                   alt={tv.name}
+                  loading="lazy"
                   className="w-full aspect-[2/3] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent p-4 flex flex-col justify-end">
@@ -156,7 +157,7 @@ export default function TvDiscovery() {
                 <span className="font-syne text-2xl md:text-3xl font-bold text-white/20 w-8 md:w-12 text-center group-hover:text-primary-soft transition-colors">
                   0{idx + 1}
                 </span>
-                <img src={getImageUrl(tv.poster_path)} className="w-12 h-16 md:w-16 md:h-24 object-cover rounded-md shadow-md" alt={tv.name} />
+                <img src={getImageUrl(tv.poster_path)} loading="lazy" className="w-12 h-16 md:w-16 md:h-24 object-cover rounded-md shadow-md" alt={tv.name} />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-syne font-bold text-base md:text-lg text-white truncate">{tv.name}</h3>
                   <p className="text-xs text-gray-500 truncate mt-1">Network {tv.id % 2 === 0 ? 'HBO' : 'Apple TV+'}</p>

@@ -13,7 +13,7 @@ export const api = axios.create({
 });
 
 // Helper for fetching image URLs
-export const getImageUrl = (path: string, size: 'w500' | 'original' = 'w500') => {
+export const getImageUrl = (path: string, size: 'w500' | 'w1280' | 'original' = 'w500') => {
   if (!path) return '';
   return `https://image.tmdb.org/t/p/${size}${path}`;
 };

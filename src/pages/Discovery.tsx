@@ -76,7 +76,7 @@ export default function Discovery() {
         {heroMovie ? (
           <>
             <img 
-              src={getImageUrl(heroMovie.backdrop_path, 'original')} 
+              src={getImageUrl(heroMovie.backdrop_path, 'w1280')} 
               alt={heroMovie.title}
               className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity"
             />
@@ -137,8 +137,8 @@ export default function Discovery() {
             <h2 className="font-syne text-2xl md:text-3xl font-bold text-white leading-tight">Trending Cinematic Releases</h2>
           </div>
           <div className="flex gap-2 shrink-0 pb-1">
-            <button onClick={() => scrollCarousel('left')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronLeft className="w-4 h-4" /></button>
-            <button onClick={() => scrollCarousel('right')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronRight className="w-4 h-4" /></button>
+            <button aria-label="Scroll left" onClick={() => scrollCarousel('left')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronLeft className="w-4 h-4" /></button>
+            <button aria-label="Scroll right" onClick={() => scrollCarousel('right')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronRight className="w-4 h-4" /></button>
           </div>
         </div>
         
@@ -150,6 +150,7 @@ export default function Discovery() {
                 <img 
                   src={getImageUrl(movie.poster_path)} 
                   alt={movie.title}
+                  loading="lazy"
                   className="w-full aspect-[2/3] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/20 to-transparent p-4 flex flex-col justify-end">
@@ -187,7 +188,7 @@ export default function Discovery() {
                 <span className="font-syne text-2xl md:text-3xl font-bold text-white/20 w-8 md:w-12 text-center group-hover:text-primary-soft transition-colors">
                   0{idx + 1}
                 </span>
-                <img src={getImageUrl(movie.poster_path)} className="w-12 h-16 md:w-16 md:h-24 object-cover rounded-md shadow-md" alt={movie.title} />
+                <img src={getImageUrl(movie.poster_path)} loading="lazy" className="w-12 h-16 md:w-16 md:h-24 object-cover rounded-md shadow-md" alt={movie.title} />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-syne font-bold text-base md:text-lg text-white truncate">{movie.title}</h3>
                   <p className="text-xs text-gray-500 truncate mt-1">Dir. {movie.id % 2 === 0 ? 'Elena Vardalos' : 'Kenji Sato'}</p>
