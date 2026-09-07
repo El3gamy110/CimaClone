@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Using a placeholder API key as requested.
 // We'll configure this later with actual TMDb credentials.
-const TMDB_API_KEY = 'YOUR_TMDB_API_KEY_PLACEHOLDER';
+const TMDB_API_KEY = '34d811fa72407b298591ea2e6ba3cdec';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
 export const api = axios.create({

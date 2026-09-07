@@ -9,6 +9,10 @@
     color-scheme: dark;
   }
   
+  html, body {
+    overflow-x: hidden;
+  }
+
   body {
     @apply bg-obsidian text-gray-100 font-sans antialiased min-h-screen;
   }
@@ -25,5 +29,14 @@
   
   .text-shadow-glow {
     text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
