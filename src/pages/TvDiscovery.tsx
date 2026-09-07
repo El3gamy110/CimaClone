@@ -44,7 +44,7 @@ export default function TvDiscovery() {
     <div className="space-y-24 pb-24 md:pb-0">
       
       {/* 1. Hero Section */}
-      <section className="relative rounded-2xl overflow-hidden glass-panel h-[70vh] min-h-[500px]">
+      <section className="relative rounded-2xl overflow-hidden glass-panel h-[70vh] min-h-[500px] bg-obsidian">
         {heroTv ? (
           <>
             <img 
@@ -102,13 +102,13 @@ export default function TvDiscovery() {
       </section>
 
       {/* 2. Trending TV Releases */}
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <span className="text-primary-soft font-mono text-xs tracking-widest uppercase">01 // Pulse</span>
-            <h2 className="font-syne text-3xl font-bold text-white">Trending TV Series</h2>
+      <section className="space-y-6 gsap-animate">
+        <div className="flex items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <span className="text-primary-soft font-mono text-xs tracking-widest uppercase whitespace-nowrap">01 // Pulse</span>
+            <h2 className="font-syne text-2xl md:text-3xl font-bold text-white leading-tight">Trending TV Series</h2>
           </div>
-          <div className="flex gap-2 hidden md:flex">
+          <div className="flex gap-2 shrink-0 pb-1">
             <button onClick={() => scrollCarousel('left')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronLeft className="w-4 h-4" /></button>
             <button onClick={() => scrollCarousel('right')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronRight className="w-4 h-4" /></button>
           </div>
@@ -140,7 +140,7 @@ export default function TvDiscovery() {
       {/* 3. Global Network Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pt-8">
         {/* Left: Most Watched */}
-        <section className="lg:col-span-2 space-y-6">
+        <section className="lg:col-span-2 space-y-6 gsap-animate">
           <div className="flex items-center justify-between">
             <div>
               <span className="text-primary-soft font-mono text-xs tracking-widest uppercase">02 // GLOBAL METRICS</span>
@@ -174,7 +174,7 @@ export default function TvDiscovery() {
         </section>
 
         {/* Right: Critic Consensus */}
-        <section className="space-y-6">
+        <section className="space-y-6 gsap-animate">
           <div className="flex items-center justify-between">
             <div>
               <span className="text-primary-soft font-mono text-xs tracking-widest uppercase">03 // EDITORIAL VERDICT</span>

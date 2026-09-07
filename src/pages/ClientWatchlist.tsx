@@ -1,7 +1,7 @@
 import { useStore } from '../store/useStore';
 import { Link } from 'react-router-dom';
 import { getImageUrl } from '../lib/api';
-import { Play, Check, Star, Zap } from 'lucide-react';
+import { Play, Check, Star, Zap, Bookmark } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { RatingBadge } from '../components/ui/RatingBadge';
@@ -18,6 +18,28 @@ const watchHabitsData = [
 
 export default function ClientWatchlist() {
   const { watchlist, toggleWatchlist, user } = useStore();
+
+  if (!user) {
+    return (
+      <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4">
+        <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mb-8 border border-primary/20 shadow-[0_0_30px_rgba(168,85,247,0.15)]">
+          <Bookmark className="w-10 h-10 text-primary-soft" />
+        </div>
+        <h1 className="font-syne text-4xl md:text-5xl font-bold text-white mb-4">Your Watchlist Awaits</h1>
+        <p className="text-gray-400 max-w-lg mx-auto mb-10 leading-relaxed">
+          Create an account or sign in to build your personalized cinematic library, save titles for later, and get curated recommendations based on your unique taste.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md mx-auto">
+          <Link to="/login" className="flex-1 py-3 bg-primary hover:bg-primary-soft text-white rounded-lg font-bold transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)]">
+            Sign In
+          </Link>
+          <Link to="/signup" className="flex-1 py-3 bg-white/5 hover:bg-white/10 border border-white/10 text-white rounded-lg font-bold transition-all">
+            Create Account
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-8 pb-24 md:pb-8">

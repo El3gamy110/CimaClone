@@ -60,11 +60,11 @@ export default function FilmDossier() {
       ].filter(b => b.file_path);
 
   return (
-    <div className="pb-24 md:pb-8">
+    <div className="pb-24 md:pb-8 -mt-[88px] md:-mt-[104px]">
       {/* 1. Hero Backdrop Section */}
       <div className="relative w-full h-[60vh] min-h-[500px]">
         {/* Full-bleed background */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-full">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[100vw] h-full bg-obsidian">
           <img 
             src={getImageUrl(movie.backdrop_path, 'original')} 
             alt={movie.title}

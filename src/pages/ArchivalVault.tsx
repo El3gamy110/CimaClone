@@ -44,7 +44,7 @@ export default function ArchivalVault() {
         <div className="xl:col-span-2 space-y-6">
           {isLoading ? Array(5).fill(0).map((_,i) => <div key={i} className="animate-pulse h-48 bg-white/5 rounded-xl" />) :
             data?.results?.slice(0, 10).map((movie: any, idx: number) => (
-            <div key={movie.id} className="flex gap-6 group items-start">
+            <div key={movie.id} className="flex gap-6 group items-start gsap-animate">
               <div className="flex flex-col items-center pt-2">
                 <div className="font-syne text-3xl font-bold text-primary-soft">#{idx + 1}</div>
                 <div className="text-[10px] font-mono text-gray-500 mt-1 uppercase">TIER A</div>

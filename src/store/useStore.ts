@@ -19,7 +19,9 @@ interface AppState {
   watchlist: WatchlistItem[];
   session: Session | null;
   user: User | null;
+  authModalOpen: boolean;
   setSession: (session: Session | null) => void;
+  setAuthModalOpen: (open: boolean) => void;
   fetchWatchlist: () => Promise<void>;
   toggleWatchlist: (item: WatchlistItem) => Promise<void>;
   isInWatchlist: (id: number) => boolean;
@@ -31,7 +33,15 @@ export const useStore = create<AppState>()(
       watchlist: [],
       session: null,
       user: null,
-      setSession: (session) => set({ session, user: session?.user ?? null }),
+      authModalOpen: false,
+      setAuthModalOpen: (open) => set({ authModalOpen: open }),
+      setSession: (session) => {
+        set({ session, user: session?.user ?? null });
+        if (!session) {
+          // Clear account watchlist when logging out
+          set({ watchlist: [] });
+        }
+      },
       fetchWatchlist: async () => {
         const { user } = get();
         if (!user) return;
@@ -55,60 +65,38 @@ export const useStore = create<AppState>()(
             vote_average: row.vote_average
           }));
           
-          // Merge local and DB watchlists
-          const localWatchlist = get().watchlist;
-          const merged = [...dbWatchlist];
-          
-          for (const localItem of localWatchlist) {
-            if (!merged.find(m => m.id === localItem.id)) {
-              merged.push(localItem);
-              // Also push this local item to the DB
-              await supabase.from('watchlists').insert({
-                user_id: user.id,
-                media_id: localItem.id,
-                media_type: localItem.media_type,
-                title: localItem.title || null,
-                name: localItem.name || null,
-                poster_path: localItem.poster_path,
-                backdrop_path: localItem.backdrop_path,
-                release_date: localItem.release_date || null,
-                first_air_date: localItem.first_air_date || null,
-                vote_average: localItem.vote_average
-              }).then(({ error }) => {
-                if (error) console.error(error);
-              });
-            }
-          }
-          
-          set({ watchlist: merged });
+          set({ watchlist: dbWatchlist });
         }
       },
       toggleWatchlist: async (item) => {
-        const current = get().watchlist;
-        const exists = current.find((i) => i.id === item.id);
-        const { user } = get();
+        const { user, watchlist } = get();
+        
+        if (!user) {
+          set({ authModalOpen: true });
+          return;
+        }
+
+        const exists = watchlist.find((i) => i.id === item.id);
 
         if (exists) {
-          set({ watchlist: current.filter((i) => i.id !== item.id) });
-          if (user) {
-            await supabase.from('watchlists').delete().match({ user_id: user.id, media_id: item.id });
-          }
+          const newList = watchlist.filter((i) => i.id !== item.id);
+          set({ watchlist: newList });
+          await supabase.from('watchlists').delete().match({ user_id: user.id, media_id: item.id });
         } else {
-          set({ watchlist: [...current, item] });
-          if (user) {
-            await supabase.from('watchlists').insert({
-              user_id: user.id,
-              media_id: item.id,
-              media_type: item.media_type,
-              title: item.title || null,
-              name: item.name || null,
-              poster_path: item.poster_path,
-              backdrop_path: item.backdrop_path,
-              release_date: item.release_date || null,
-              first_air_date: item.first_air_date || null,
-              vote_average: item.vote_average
-            });
-          }
+          const newList = [...watchlist, item];
+          set({ watchlist: newList });
+          await supabase.from('watchlists').insert({
+            user_id: user.id,
+            media_id: item.id,
+            media_type: item.media_type,
+            title: item.title || null,
+            name: item.name || null,
+            poster_path: item.poster_path,
+            backdrop_path: item.backdrop_path,
+            release_date: item.release_date || null,
+            first_air_date: item.first_air_date || null,
+            vote_average: item.vote_average
+          });
         }
       },
       isInWatchlist: (id) => {
@@ -117,7 +105,7 @@ export const useStore = create<AppState>()(
     }),
     {
       name: 'cimaclone-storage',
-      partialize: (state) => ({ watchlist: state.watchlist }), // only persist watchlist locally
+      partialize: () => ({}), // We no longer persist the watchlist locally since it's strictly cloud-based
     }
   )
 );

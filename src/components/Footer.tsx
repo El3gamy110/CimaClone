@@ -8,8 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           <div className="space-y-6 md:col-span-1">
             <Link to="/" className="flex items-center gap-2">
-              <img src="/logo.png" alt="CINE NOIR Logo" className="h-8 w-8 object-contain" />
-              <span className="font-syne font-bold text-xl text-primary-soft tracking-wider">CINE NOIR</span>
+              <img src="/logo.png" alt="CINE NOIR Logo" className="object-contain" />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed max-w-xs">
               The definitive cinematic archive designed for passionate cinephiles, industry curators, and late-night film explorers.
@@ -17,46 +16,34 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-syne font-bold text-white uppercase tracking-widest text-sm">Genres</h4>
+            <h4 className="font-syne font-bold text-white uppercase tracking-widest text-sm">Movies</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Neo-Noir & Thriller</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Sci-Fi & Cyberpunk</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Psychological Drama</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Art House & Indie</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Classic Remasters</Link></li>
+              <li><Link to="/" className="hover:text-primary-soft transition-colors">Discover Movies</Link></li>
+              <li><Link to="/vault" className="hover:text-primary-soft transition-colors">Top Rated Movies</Link></li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-syne font-bold text-white uppercase tracking-widest text-sm">Platform & Dev</h4>
+            <h4 className="font-syne font-bold text-white uppercase tracking-widest text-sm">TV Series</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">API Documentation</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Community Forums</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Developer Sandbox</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Release Notes</Link></li>
+              <li><Link to="/tv" className="hover:text-primary-soft transition-colors">Discover TV Series</Link></li>
+              <li><Link to="/tv/vault" className="hover:text-primary-soft transition-colors">Top Rated TV</Link></li>
             </ul>
           </div>
 
           <div className="space-y-4">
-            <h4 className="font-syne font-bold text-white uppercase tracking-widest text-sm">Editorial & Legal</h4>
+            <h4 className="font-syne font-bold text-white uppercase tracking-widest text-sm">Account</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Terms of Service</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Privacy Policy</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Editorial Standards</Link></li>
-              <li><Link to="#" className="hover:text-primary-soft transition-colors">Content Ingestion</Link></li>
+              <li><Link to="/watchlist" className="hover:text-primary-soft transition-colors">My Watchlist</Link></li>
+              <li><Link to="/login" className="hover:text-primary-soft transition-colors">Sign In</Link></li>
+              <li><Link to="/signup" className="hover:text-primary-soft transition-colors">Create Account</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
-          <p>© 2026 CineNoir Media Database Corp. Engineered for cinematic purity.</p>
-          <div className="flex items-center gap-6">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-primary-soft animate-pulse"></span>
-              System Operational
-            </span>
-            <span>Powered by CineNoir Core v4.8</span>
-          </div>
+          <p>© 2026 CimaClone Media Database Corp. Engineered for cinematic purity.</p>
+          <span>Powered by CimaClone</span>
         </div>
       </div>
     </footer>

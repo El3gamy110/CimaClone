@@ -7,6 +7,11 @@ import { Play, Plus, Info, ChevronRight, ChevronLeft, Check } from 'lucide-react
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
 import { RatingBadge } from '../components/ui/RatingBadge';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Discovery() {
   const { toggleWatchlist, isInWatchlist } = useStore();
@@ -18,6 +23,29 @@ export default function Discovery() {
       carouselRef.current.scrollBy({ left: dir === 'left' ? -300 : 300, behavior: 'smooth' });
     }
   };
+
+  useGSAP(() => {
+    gsap.from('.hero-title', { opacity: 0, y: 50, duration: 1, delay: 0.2, ease: 'power3.out' });
+    gsap.from('.hero-stats', { opacity: 0, y: 20, duration: 0.8, delay: 0.4, ease: 'power3.out' });
+    gsap.from('.hero-overview', { opacity: 0, y: 20, duration: 0.8, delay: 0.6, ease: 'power3.out' });
+    gsap.from('.hero-buttons', { opacity: 0, y: 20, duration: 0.8, delay: 0.8, ease: 'power3.out' });
+
+    // Scroll Animations
+    gsap.from('.gsap-trending-section', {
+      scrollTrigger: { trigger: '.gsap-trending-section', start: 'top 85%' },
+      opacity: 0, y: 50, duration: 0.8, ease: 'power3.out'
+    });
+
+    gsap.from('.gsap-box-office .gsap-item', {
+      scrollTrigger: { trigger: '.gsap-box-office', start: 'top 85%' },
+      opacity: 0, x: -30, stagger: 0.1, duration: 0.6, ease: 'power3.out'
+    });
+
+    gsap.from('.gsap-critic', {
+      scrollTrigger: { trigger: '.gsap-critic', start: 'top 85%' },
+      opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out'
+    });
+  });
 
 
 
@@ -44,18 +72,18 @@ export default function Discovery() {
     <div className="space-y-24 pb-24 md:pb-0">
       
       {/* 1. Hero Section */}
-      <section className="relative rounded-2xl overflow-hidden glass-panel h-[70vh] min-h-[500px]">
+      <section className="relative rounded-2xl overflow-hidden glass-panel h-[70vh] min-h-[500px] bg-obsidian">
         {heroMovie ? (
           <>
             <img 
               src={getImageUrl(heroMovie.backdrop_path, 'original')} 
               alt={heroMovie.title}
-              className="absolute inset-0 w-full h-full object-cover opacity-60"
+              className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/80 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent" />
-            
-            <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-center">
+            <div className="absolute inset-0 bg-gradient-to-r from-obsidian via-obsidian/60 to-transparent z-0" />
+            <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent z-0" />
+
+            <div className="absolute inset-0 p-8 md:p-16 flex flex-col justify-center z-10">
               <div className="max-w-2xl space-y-6">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="highlight">PREMIERE FEATURE</Badge>
@@ -64,11 +92,11 @@ export default function Discovery() {
                   <span className="text-xs text-gray-400 font-medium ml-2">2h 44m • Sci-Fi / Mystery / Neo-Noir</span>
                 </div>
                 
-                <h1 className="font-syne text-5xl md:text-7xl font-bold text-shadow-glow text-white leading-tight">
+                <h1 className="hero-title font-syne text-5xl md:text-7xl font-bold text-shadow-glow text-white leading-tight">
                   {heroMovie.title}
                 </h1>
                 
-                <div className="flex items-center gap-6">
+                <div className="hero-stats flex items-center gap-6">
                   <RatingBadge score={heroMovie.vote_average} className="scale-110 origin-left" />
                   <div className="flex items-center gap-2 text-xs font-semibold text-gray-300">
                     <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center text-white">R</div>
@@ -76,11 +104,11 @@ export default function Discovery() {
                   </div>
                 </div>
 
-                <p className="font-sans text-gray-300 text-lg leading-relaxed max-w-xl line-clamp-3">
+                <p className="hero-overview font-sans text-gray-300 text-lg leading-relaxed max-w-xl line-clamp-3">
                   {heroMovie.overview}
                 </p>
 
-                <div className="flex items-center gap-4 pt-4">
+                <div className="hero-buttons flex items-center gap-4 pt-4">
                   <Button size="lg" className="gap-2" onClick={() => navigate(`/movie/${heroMovie.id}`)}>
                     <Play className="w-5 h-5 fill-current" />
                     Watch Official Trailer
@@ -102,13 +130,13 @@ export default function Discovery() {
       </section>
 
       {/* 2. Trending Cinematic Releases */}
-      <section className="space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-4">
-            <span className="text-primary-soft font-mono text-xs tracking-widest uppercase">01 // Pulse</span>
-            <h2 className="font-syne text-3xl font-bold text-white">Trending Cinematic Releases</h2>
+      <section className="space-y-6 gsap-trending-section">
+        <div className="flex items-end justify-between gap-4">
+          <div className="flex flex-col gap-1">
+            <span className="text-primary-soft font-mono text-xs tracking-widest uppercase whitespace-nowrap">01 // Pulse</span>
+            <h2 className="font-syne text-2xl md:text-3xl font-bold text-white leading-tight">Trending Cinematic Releases</h2>
           </div>
-          <div className="flex gap-2 hidden md:flex">
+          <div className="flex gap-2 shrink-0 pb-1">
             <button onClick={() => scrollCarousel('left')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronLeft className="w-4 h-4" /></button>
             <button onClick={() => scrollCarousel('right')} className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary-soft transition-all"><ChevronRight className="w-4 h-4" /></button>
           </div>
@@ -143,7 +171,7 @@ export default function Discovery() {
       {/* 3. Box Office & Critic Consensus Split */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pt-8">
         {/* Left: Box Office */}
-        <section className="lg:col-span-2 space-y-6">
+        <section className="lg:col-span-2 space-y-6 gsap-box-office">
           <div className="flex items-center justify-between">
             <div>
               <span className="text-primary-soft font-mono text-xs tracking-widest uppercase">02 // GLOBAL METRICS</span>
@@ -153,9 +181,9 @@ export default function Discovery() {
           </div>
 
           <div className="space-y-4">
-            {popularLoading ? Array(4).fill(0).map((_,i) => <div key={i} className="animate-pulse h-24 bg-white/5 rounded-xl" />) :
+            {popularLoading ? Array(4).fill(0).map((_,i) => <div key={i} className="animate-pulse h-24 bg-white/5 rounded-xl gsap-item" />) :
               popular?.results?.slice(0, 4).map((movie: any, idx: number) => (
-              <div key={movie.id} className="flex items-center gap-4 group p-2 hover:bg-white/5 rounded-xl transition-colors">
+              <div key={movie.id} className="flex items-center gap-4 group p-2 hover:bg-white/5 rounded-xl transition-colors gsap-item">
                 <span className="font-syne text-2xl md:text-3xl font-bold text-white/20 w-8 md:w-12 text-center group-hover:text-primary-soft transition-colors">
                   0{idx + 1}
                 </span>
@@ -177,7 +205,7 @@ export default function Discovery() {
         </section>
 
         {/* Right: Critic Consensus */}
-        <section className="space-y-6">
+        <section className="space-y-6 gsap-critic">
           <div className="flex items-center justify-between">
             <div>
               <span className="text-primary-soft font-mono text-xs tracking-widest uppercase">03 // EDITORIAL VERDICT</span>
