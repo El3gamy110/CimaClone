@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Outlet, Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
-import { Compass, Archive, Bookmark, Search, Bell, Clapperboard, Tv, User as UserIcon, ChevronDown, LogIn, LogOut, X } from 'lucide-react';
+import { Bookmark, Search, Clapperboard, Tv, User as UserIcon, ChevronDown, LogIn, LogOut, X } from 'lucide-react';
 import Footer from '../components/Footer';
 import { api, getImageUrl } from '../lib/api';
 import { useQuery } from '@tanstack/react-query';
