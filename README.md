@@ -1,69 +1,81 @@
-# CimaClone
+# CimaClone 🎬
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-🚀-brightgreen)](https://cima-clone.vercel.app/)
+![CimaClone](https://cima-clone.vercel.app/favicon.png) <!-- Update this path if needed -->
 
-CimaClone is a modern, glass‑morphism styled web application for discovering movies and TV series. Built with **React**, **TypeScript**, and **Vite**, it delivers a premium, high‑performance experience with dynamic 3D backgrounds, lazy‑loaded assets, and a fully responsive mobile‑first UI.
+**Live Demo:** [https://cima-clone.vercel.app/](https://cima-clone.vercel.app/)
 
----
+CimaClone is a premium, beautifully designed movie and TV series discovery application. Built with modern web technologies, it features a sleek glassmorphism aesthetic, an interactive 3D background, and blazing-fast performance. Users can explore trending content, view detailed information about movies and shows, and manage their personal watchlist.
 
-## ✨ Features
-- **Responsive Design** – Seamless experience on desktop, tablet, and mobile. The mobile bottom navigation mirrors desktop primary tabs.
-- **3D Animated Background** – A lightweight, lazily‑loaded scene using `React.lazy` & `Suspense`.
-- **Hero Sections & Carousels** – Smooth, glass‑styled hero banners and infinite‑scroll carousels for trending content.
-- **Watchlist Powered by Supabase** – Authenticated users can save movies/series to a personal watchlist.
-- **Image Optimization** – TMDB images are fetched at `w1280` size and all off‑screen images use native `loading="lazy"`.
-- **Accessibility** – All interactive elements have appropriate `aria-label`s; keyboard navigation is fully supported.
-- **Performance‑First** – Code‑splitting, lazy loading, and removal of heavy dependencies (e.g., `recharts`) keep the bundle under 500 KB gzipped.
-- **State Management** – Simple, powerful state handled by **Zustand**.
+## ✨ Key Features
 
----
+-   **Stunning UI/UX:** A rich, dark-mode design with glassmorphism effects, smooth gradients, and micro-animations.
+-   **Dynamic 3D Background:** An immersive 3D scene that enhances the visual experience without compromising performance.
+-   **Comprehensive Discovery:** Browse trending cinematic releases and top TV series.
+-   **Detailed Media Profiles:** In-depth information for movies and TV shows, including cast, genres, ratings, and related media.
+-   **Personalized Watchlist:** Users can create an account and curate their own watchlist, securely stored and synced across devices.
+-   **Responsive Design:** A seamless experience across desktop, tablet, and mobile devices, featuring a custom mobile bottom navigation.
+-   **Highly Optimized:** Built for speed with route-level code splitting, lazy-loaded images and 3D assets, and minimized bundle sizes.
 
-## 🚀 Live Demo
-Check the app in action: **[https://cima-clone.vercel.app/](https://cima-clone.vercel.app/)**
+## 🛠️ Technology Stack
 
----
+-   **Frontend Framework:** React 18 with TypeScript
+-   **Build Tool:** Vite
+-   **Routing:** React Router v6
+-   **State Management:** Zustand
+-   **Styling:** Tailwind CSS (with custom vanilla CSS for specific effects)
+-   **Backend & Authentication:** Supabase
+-   **3D Graphics:** Three.js / React Three Fiber
+-   **Animations:** GSAP (GreenSock Animation Platform)
+-   **Icons:** Lucide React
+-   **Data Source:** TMDB (The Movie Database) API
 
-## 📦 Getting Started
-```bash
-# Clone the repo
-git clone https://github.com/your‑username/CimaClone.git
-cd CimaClone
+## 🚀 Performance Highlights
 
-# Install dependencies
-npm install
+-   **Code Splitting:** Implemented `React.lazy` and `Suspense` for all routes and heavy components (like the 3D scene) to ensure rapid initial page loads.
+-   **Asset Optimization:** Uses highly optimized image sizes (e.g., `w1280` for hero backdrops) and native lazy loading (`loading="lazy"`) for all offscreen media.
+-   **Lean Bundle:** Removed unnecessary heavy dependencies (e.g., replaced large charting libraries with pure CSS alternatives) to keep the JavaScript bundle under 500KB gzipped.
+-   **Accessibility:** Fully accessible with ARIA labels and keyboard navigation support.
 
-# Run the development server
-npm run dev
-```
-The app will be available at `http://localhost:5173`.
+## 💻 Running Locally
 
----
+To run this project on your local machine, follow these steps:
 
-## 🛠️ Build & Deploy
-```bash
-# Build for production
-npm run build
-```
-The output is placed in the `dist/` directory and can be deployed to any static‑hosting provider (Vercel, Netlify, Cloudflare Pages, etc.).
+### Prerequisites
 
----
+-   Node.js (v18 or higher recommended)
+-   npm or yarn
+-   A Supabase project (for authentication and database)
+-   A TMDB API Key
 
-## 🧪 Testing & Performance
-- **Unit Tests** – `npm run test`
-- **Lighthouse CI** – `npx lhci autorun` (or `npm run lhci`).
-- **Performance Checklist** – see `.agents/rules/performance_test.md` for a detailed verification workflow.
+### Installation
 
----
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/El3gamy110/CimaClone.git
+    cd CimaClone
+    ```
 
-## 🤝 Contributing
-Contributions are welcome! Please:
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feat/awesome-feature`).
-3. Open a pull request with a clear description of changes.
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-Make sure linting passes (`npm run lint`) and all tests succeed before submitting.
+3.  **Set up environment variables:**
+    Create a `.env` file in the root of your project and add the necessary environment variables. You will need:
+    -   Supabase URL
+    -   Supabase Anon Key
+    -   (Optional) TMDB API key if you plan to change the default one in `src/lib/api.ts`.
 
----
+4.  **Start the development server:**
+    ```bash
+    npm run dev
+    ```
+
+5.  **Build for production:**
+    ```bash
+    npm run build
+    ```
 
 ## 📜 License
-This project is licensed under the **MIT License**.
+
+This project is open-source and available under the MIT License.
